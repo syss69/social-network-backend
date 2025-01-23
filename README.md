@@ -1,5 +1,5 @@
 AFEC TP DEV WEB ET WEB MOBILE
-10-24 -- 07-25
+10-24-2024 -- 07-25-2025
 stack:
 node.js
 mongoDb
