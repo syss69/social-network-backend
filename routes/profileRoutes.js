@@ -43,4 +43,15 @@ router.patch("/change/bio", async (req, res) => {
   }
 });
 
+router.get("/:id", async(req, res) => {
+  try{const profile = await profileModel.findOne({userdata: req.params.id});
+  if(profile){
+    res.status(200).send(profile);
+  }else{
+    res.status(404).json({ message: false })
+  }}catch(err){
+    console.error(err.message)
+  }
+})
+
 module.exports = router;
