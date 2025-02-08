@@ -27,7 +27,6 @@ class userController{
     async getUser(req, res){
         try{
             const user = await userService.getUserService(req.params.id);
-            console.log(user)
             if(user.status == false){
                 return res.status(404).json(user)
             }

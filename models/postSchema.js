@@ -11,7 +11,7 @@ const postSchema = new Schema({
   media: String,
   likes: Array,
   comments: Array,
-  age: Date,
+  age: {type: Date, required: true},
 });
 
 const postModel = mongoose.model("Post", postSchema);
