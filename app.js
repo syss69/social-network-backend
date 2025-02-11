@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const userRoutes = require("./routes/userRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
@@ -17,6 +18,8 @@ app.use(
     allowedHeaders: "Content-Type,Authorization",
   })
 );
+
+app.use(cookieParser());
 
 app.use(express.json());
 
