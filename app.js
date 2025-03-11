@@ -10,7 +10,8 @@ const mongooseConnect = require("./config/db.js");
 
 const app = express();
 const port = 3000;
-
+console.log("hello artem");
+/*
 app.use(
   cors({
     origin: "http://127.0.0.1:5501",
@@ -18,10 +19,13 @@ app.use(
     allowedHeaders: "Content-Type,Authorization",
   })
 );
-
+*/
 app.use(cookieParser());
 
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
 
 app.use("/users", userRoutes);
 
