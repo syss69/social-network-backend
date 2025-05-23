@@ -9,7 +9,13 @@ const userSchema = new Schema({
     hidden: true,
     required: true,
   },
-  password: { type: String, select: false, required: true },
+  password: { type: String, required: true },
+  name: String,
+  bio: String,
+  avatar: String,
+  friends: { type: Array, ref: "User" },
+  servers: Array,
+  posts: Array,
 });
 
 const userModel = mongoose.model("User", userSchema);

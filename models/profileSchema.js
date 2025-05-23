@@ -5,7 +5,7 @@ const profileSchema = new Schema({
   name: String,
   bio: String,
   friends: { type: Array, ref: "User" },
-  serveurs: Array,
+  servers: Array,
   posts: Array,
   userdata: {
     type: mongoose.Schema.Types.ObjectId,

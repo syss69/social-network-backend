@@ -15,11 +15,15 @@ class userController{
     }
     async loginUser(req, res){
         try{
-            const user = await userService.loginUserService(req.body);
-            if(user.status == false){
+            const response = await userService.loginUserService(req.body);
+            if(response.status == false){
                 return res.status(404).json(user)
             }
-            res.json(user);
+            return res.status(200).cookie("token", response.token, {
+                maxAge: 60 * 60 * 1000,
+                httpOnly: true,
+            })
+            .json({ status: response.status, userId: response.userId })
         }catch(err){
             res.status(500).json({status: false, message: err.message})
         }
@@ -31,6 +35,15 @@ class userController{
                 return res.status(404).json(user)
             }
             res.json(user)
+        }catch(err){
+            res.status(500).json({status: false, message: err.message})
+        }
+    }
+
+    async getMe(req, res){
+        try{
+            const me = await userService.getMeService(req.userId);
+            res.json(me);
         }catch(err){
             res.status(500).json({status: false, message: err.message})
         }

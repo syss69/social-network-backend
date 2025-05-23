@@ -1,5 +1,5 @@
 const userModel = require("../models/userSchema.js");
-const profileModel = require("../models/profileSchema.js");
+const argon2 = require("argon2")
 
 class repoUser {
     constructor(){};
@@ -7,15 +7,20 @@ class repoUser {
         try{
         const user = await userModel.findOne({
             username: data.username,
-            password: data.password,
           });
         if(!user){
             return {
                 status: false,
                 message: "Username does not exist or password is not correct",}
-        }else{
-            return { status: true, message: "Authentificated", userId: user._id};
         }
+        const isPasswordValid = await argon2.verify(user.password, data.password);
+        if (!isPasswordValid) {
+            return {
+            status: false,
+            message: "Username does not exist or password is not correct",
+            };
+        }
+        return { status: true, message: "Authentificated", userId: user._id};
         }catch(err){
             console.error(err.message)
             return  { status: false, message: "Internal server error" };
@@ -24,7 +29,7 @@ class repoUser {
     async getUser(data){
         const user = await userModel.findById(data);
         if(user){
-            return { status: true }
+            return user;
         }else{
             return { status: false }
         }
@@ -35,7 +40,9 @@ class repoUser {
             const user = new userModel({
                 username: data.username,
                 email: data.email,
-                password: data.password
+                password: data.password,
+                name: data.name,
+                bio: data.bio
             })
             try{
                 await user.save();
@@ -49,6 +56,26 @@ class repoUser {
                       }
                 }
             }
+        }catch(err){
+            console.error(err.message);
+            return { status: false, message: "Internal server error" };
+        }
+    }
+
+    async changeUser (data){
+        try{
+            const user = await userModel.findByIdAndUpdate(data.id);
+
+        }catch(err){
+            console.error(err.message);
+            return { status: false, message: "Internal server error" };
+        }
+    }
+
+    async getMe (id){
+        try{
+            const me = await userModel.findById(id);
+            return me;
         }catch(err){
             console.error(err.message);
             return { status: false, message: "Internal server error" };
