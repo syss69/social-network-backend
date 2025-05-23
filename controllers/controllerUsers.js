@@ -1,4 +1,3 @@
-const express = require("express");
 const userService = require("../services/serviceUsers.js");
 
 class userController{
@@ -35,6 +34,18 @@ class userController{
                 return res.status(404).json(user)
             }
             res.json(user)
+        }catch(err){
+            res.status(500).json({status: false, message: err.message})
+        }
+    }
+
+    async getUsersFriends(req, res){
+        try{
+            const friends = await userService.getUsersFriendsService(req.params.id);
+            if(friends.status === false){
+                return res.status(500).send(friends)
+            }
+            res.status(200).send(friends)
         }catch(err){
             res.status(500).json({status: false, message: err.message})
         }

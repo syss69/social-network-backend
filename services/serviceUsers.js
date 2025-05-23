@@ -40,6 +40,15 @@ class userServices {
         }
     }
 
+    async getUsersFriendsService(data){
+        try{
+            const response = await userRepository.getUsersFriends(data);
+            return response;
+        }catch(err){
+            return { status: false, message: err.message };
+        }
+    }
+
     async getMeService (data){
         try{
             const response = await userRepository.getMe(data);

@@ -36,6 +36,7 @@ class repoPost {
             return {status: false, message: err.message}
         }
     }
+    
 }
 
 module.exports = new repoPost();

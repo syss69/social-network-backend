@@ -35,6 +35,15 @@ class repoUser {
         }
     }
 
+    async getUsersFriends(data){
+        const user = await userModel.findById(data).populate('friends');
+        if(user){
+            return user.friends
+        }else{
+            return { status: false }
+        }
+    }
+
     async createUser (data){
         try{
             const user = new userModel({
