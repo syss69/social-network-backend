@@ -3,7 +3,7 @@ const postService = require("../services/servicePosts.js");
 class postController{
     async createPost(req, res){
         try{
-            const newPost = await postService.createPostService(req.body);
+            const newPost = await postService.createPostService(req.body, req.userId);
             if(newPost.status == false){
                 return res.status(409).json(newPost)
             }

@@ -15,7 +15,8 @@ const userSchema = new Schema({
   avatar: String,
   friends: { type: Array, ref: "User" },
   servers: Array,
-  posts: Array,
+  posts: {type: Array, ref: "Post"},
+  conversations: {type: Array, ref: "Conversation"}
 });
 
 const userModel = mongoose.model("User", userSchema);

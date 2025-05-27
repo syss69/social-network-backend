@@ -14,6 +14,19 @@ class repoConversation {
             return { status: false, message: "Internal server error" };
         }
     }
+
+    async getConversation(data){
+        try{
+            const conversation = await conversationModel.findById(data);
+            if (conversation) {
+                return {status: true, conversation: conversation}
+            }
+            return {status: false, message: "Conversation not found!"}
+        }catch(err){
+            console.error(err.message);
+            return { status: false, message: "Internal server error" };
+        }
+    }
 }
 
 module.exports = new repoConversation();

@@ -2,10 +2,10 @@ const postModel = require("../models/postSchema.js");
 
 class repoPost {
     constructor(){};
-    async createPost(data){
+    async createPost(data, id){
         try{
             const newPost =  new postModel({
-                author: data.author,
+                author: id,
                 content: data?.content,
                 media: data?.media,
                 age: data.age

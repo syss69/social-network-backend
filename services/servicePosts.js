@@ -1,9 +1,9 @@
 const repoPost = require("../repositories/postRepository");
 
 class postService {
-    async createPostService (data){
+    async createPostService (data, id){
         try{
-            const response = await repoPost.createPost(data);
+            const response = await repoPost.createPost(data, id);
             return response
         }catch(err){
             console.error("err in service", err.message);
