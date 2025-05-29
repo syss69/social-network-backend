@@ -18,6 +18,15 @@ class conversationService{
             return {status: false, message: err.message}
         }
     }
+
+    async getMyConversationsNames (data){
+        try{
+            return await conversationRepository.getMyConversationsName(data);
+        }catch(err){
+            console.error("error in get my conversations names service:", err.message);
+            return {status: false, message: err.message}
+        }
+    }
 }
 
 module.exports = new conversationService ();

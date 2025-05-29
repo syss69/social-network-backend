@@ -21,6 +21,18 @@ class conversationController{
             res.status(500).json({status: false, message: err.message});
         }
     }
+
+    async getMyConversationsNames (req, res){
+        try{
+            const names = await conversationService.getMyConversationsNames(req.userId);
+            if(!names.status){
+                return res.status(409).json(names)
+            }
+            return res.status(200).json(names)
+        }catch(err){
+            res.status(500).json({status: false, message: err.message});
+        }
+    }
 }
 
 module.exports = new conversationController();

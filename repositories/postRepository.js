@@ -11,7 +11,7 @@ class repoPost {
                 age: data.age
             });
             await newPost.save();
-            return { status: true, message: "Post saved" };
+            return { status: true, message: "Post saved", post: newPost };
         }catch(err){
             console.error("err in repo", err.message);
             return { status: false, message: err.message };
@@ -19,7 +19,7 @@ class repoPost {
     }
     async findPostsByUserId(data){
         try{
-            const posts = await postModel.find({author: data});
+            const posts = await postModel.find({author: data}).populate("author");
             return posts;
         }catch(err){
             return {status: false, message: err.message}
