@@ -1,5 +1,7 @@
 const userModel = require("../models/userSchema.js");
 const argon2 = require("argon2")
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 class repoUser {
     constructor(){};

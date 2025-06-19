@@ -1,6 +1,7 @@
 const userRepository = require("../repositories/userRepository.js");
 const argon2 = require("argon2")
 const jwt = require("jsonwebtoken")
+require("dotenv").config();
 
 class userServices {
     async createUserService (data){
@@ -12,14 +13,14 @@ class userServices {
         }
     }
 
-    async getUserService (data){
-        try{
-            return await userRepository.getUser(data);
-        }catch(err){
-            console.error("error in service:", err.message);
-            return {status: false, message: err.message}
-        }
+  async getUserService(data) {
+    try {
+      return await userRepository.getUser(data);
+    } catch (err) {
+      console.error("error in service:", err.message);
+      return { status: false, message: err.message };
     }
+  }
 
     async loginUserService (data){
         try{
@@ -60,4 +61,4 @@ class userServices {
     }
 }
 
-module.exports = new userServices ();
+module.exports = new userServices();
